@@ -14,3 +14,8 @@ fun scrapManual(): Triple<Request, Response, Result<String, FuelError>> {
     //an extension over string (support GET, PUT, POST, DELETE with httpGet(), httpPut(), httpPost(), httpDelete())
     return "https://reddit.com".httpGet().responseString()
 }
+
+fun scrapLocal(): Triple<Request, Response, Result<String, FuelError>> {
+    //an extension over string (support GET, PUT, POST, DELETE with httpGet(), httpPut(), httpPost(), httpDelete())
+    return "http://localhost:8080".httpGet().responseString()
+}

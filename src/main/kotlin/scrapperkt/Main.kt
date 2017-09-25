@@ -1,5 +1,8 @@
 package scrapperkt
 
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 import org.jetbrains.ktor.routing.*
 import org.jetbrains.ktor.application.*
 import org.jetbrains.ktor.features.DefaultHeaders
@@ -20,14 +23,23 @@ fun main(args: Array<String>) {
     println(result.get())
 
 
-    embeddedServer(Netty, 8080) {
-        routing {
-            get("/") {
-                call.respondText("Hello, world!", ContentType.Text.Html)
+    launch(CommonPool) {
+
+        embeddedServer(Netty, 8080) {
+            routing {
+                get("/") {
+                    call.respondText("Hello, world!", ContentType.Text.Html)
+                }
             }
-        }
-    }.start(wait = true)
+        }.start(wait = true)
 
+    }
 
-    Thread.sleep(100000)
+    Thread.sleep(2000)
+
+    val (request2, response2, result2) = scrapLocal()
+    println("Call local ended, result:")
+    println(result2.get())
+
+    System.exit(0)
 }
