@@ -1,0 +1,39 @@
+buildscript {
+    ext.kotlin_version = '1.1.50'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+
+
+apply plugin: 'kotlin'
+
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'com.github.kittinunf.fuel:fuel:+' //for JVM
+    //compile 'com.github.kittinunf.fuel:fuel-rxjava:+' //for RxJava support
+    //compile 'com.github.kittinunf.fuel:fuel-gson:+' //for Gson support
+    testCompile "io.kotlintest:kotlintest:+"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'scrapperkt.MainKt'
+    }
+
+    // This line of code recursively collects and copies all of a project's files
+    // and adds them to the JAR itself. One can extend this task, to skip certain
+    // files or particular types at will
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}

@@ -1,0 +1,5 @@
+.idea/
+scrap-kt.iml
+target/
+.gradle/
+build/
