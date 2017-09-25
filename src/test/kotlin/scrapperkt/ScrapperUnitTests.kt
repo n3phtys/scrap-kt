@@ -11,5 +11,13 @@ class MyTests : WordSpec() {
                 "".length shouldBe 0
             }
         }
+
+        "scrapping reddit" should {
+            "return html" {
+
+                val (request, response, result) = scrapManual()
+                result.get().contains("</html>") shouldBe true
+            }
+        }
     }
 }
