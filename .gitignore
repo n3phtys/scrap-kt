@@ -3,3 +3,4 @@ scrap-kt.iml
 target/
 .gradle/
 build/
+out/

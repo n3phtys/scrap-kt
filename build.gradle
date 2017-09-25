@@ -10,7 +10,7 @@ buildscript {
     }
 }
 
-
+apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'kotlin'
 
@@ -22,11 +22,28 @@ repositories {
     jcenter()
 }
 
+test {
+    // show standard out and standard error of the test JVM(s) on the console
+    testLogging.showStandardStreams = true
+    include 'scrapperkt/**'
+
+    // listen to events in the test execution lifecycle
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
+
+    // listen to standard out and standard error of the test JVM(s)
+    onOutput { descriptor, event ->
+        logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
+    }
+}
+
+
 dependencies {
     compile 'com.github.kittinunf.fuel:fuel:+' //for JVM
     //compile 'com.github.kittinunf.fuel:fuel-rxjava:+' //for RxJava support
     //compile 'com.github.kittinunf.fuel:fuel-gson:+' //for Gson support
-    testCompile "io.kotlintest:kotlintest:+"
+    testCompile 'junit:junit:4.12'
 }
 
 jar {
