@@ -3,4 +3,5 @@ before_install:
  - chmod +x gradlew
 script:
   ./gradlew test
+after_script:
   ./gradlew run
