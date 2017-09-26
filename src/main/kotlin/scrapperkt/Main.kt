@@ -17,6 +17,16 @@ import java.io.File
 
 
 fun main(args: Array<String>) {
+
+    println("<CommandlineArgs>" )
+    args.forEach {
+        println(it)
+    }
+    println("</CommandlineArgs>")
+
+
+
+
     println("Hello, world!")
 
     val (request, response, result) = scrapManual()
