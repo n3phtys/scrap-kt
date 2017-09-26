@@ -63,3 +63,10 @@ fun main(args: Array<String>) {
 
     System.exit(0)
 }
+
+
+class MyArgsParser() {
+    val url: String = "" //required, includes potential intervals
+    val filedir: String = "" //if set and non-empty, use as parent dir to store
+
+}
