@@ -13,14 +13,24 @@ import org.jetbrains.ktor.http.*
 import org.jetbrains.ktor.netty.*
 import org.jetbrains.ktor.response.*
 import org.jetbrains.ktor.routing.*
+import java.io.File
 
 
 fun main(args: Array<String>) {
     println("Hello, world!")
 
     val (request, response, result) = scrapManual()
-    println("Call ended, result:")
+    println("Call to reddit ended, result:")
     println(result.get())
+
+
+    val dir = File("./target")
+
+
+    val res = scrapUrl("https://github.com/n3phtys").unpack().appendToDiskFile(dir)
+
+    println("Also wrote down scrapped html from: " + res.url)
+
 
 
     launch(CommonPool) {
